@@ -13,7 +13,6 @@ Evi4PKT augments standard KT backbones (DKT, SAKT, AKT, etc.) with **Q-matrix–
 | **Error** | Compile/test feedback tied to task-required KCs |
 | **Process** | Historical KC exposure and success before the attempt |
 
-In this bundle, evidence is **early-fused** (concatenated) with problem features and fed into eight KT backbones. Rule-based Process and Error (mechanism) channels are included; LLM-derived Code/Error channels are not redistributed (see [supplementary/evidence_schema.md](supplementary/evidence_schema.md)).
 
 ## Quick start
 
@@ -39,8 +38,6 @@ supplementary/   Data access, Q matrix, evidence schema
 data/metadata/   Q matrix and problem prompts (small metadata only)
 data/splits/     Precomputed train/valid/test student lists (F19 & S19, seeds 0–9)
 ```
-
-Raw CSEDM files, processed framework logs, LLM caches, and checkpoints are **not** included — see [supplementary/DATA_ACCESS.md](supplementary/DATA_ACCESS.md). **Student split lists** for the paper protocol **are** included under `data/splits/`.
 
 ## Reproduction highlights
 
