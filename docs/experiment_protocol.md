@@ -1,7 +1,7 @@
 # Experiment Protocol (reproduction bundle)
 
 - **Cohorts:** F19 (primary); S19 (full tier).
-- **Split:** student 80/10/10, seeds 0–9.
+- **Split:** student 80/10/10, seeds 0–9; no precomputed split files — deterministic in `evipkt.dataset.split_students` (see `supplementary/filtering_rules.md`).
 - **Backbones:** DKT, DKVMN, SAKT, AKT, qDKT, QIKT, SimpleKT, SparseKT.
 - **Backbone variant:** `problem_onehot` (v0).
 - **Full variant (repro):** v5 feature mode on rule-enriched logs (Q + Process + Mechanism;).

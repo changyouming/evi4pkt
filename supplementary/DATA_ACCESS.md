@@ -8,4 +8,4 @@ After obtaining the releases:
 2. Place S19 under `data/raw/S19/` (full tier only).
 3. Run `bash scripts/enrich_rule_based.sh f19` (and `s19` for full tier).
 
-This repository does **not** ship raw CSEDM files, processed framework logs, LLM caches, or model checkpoints.
+This repository does **not** ship raw CSEDM files, processed framework logs, precomputed train/validation/test split list files, LLM caches, or model checkpoints. Student splits are defined by the deterministic procedure in `evipkt/dataset.py` (see [filtering_rules.md](filtering_rules.md)).

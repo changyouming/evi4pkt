@@ -39,18 +39,27 @@ supplementary/   Data access, Q matrix, evidence schema
 data/metadata/   Q matrix and problem prompts (small metadata only)
 ```
 
-Raw CSEDM files, processed framework logs, LLM caches, and checkpoints are **not** included — see [supplementary/DATA_ACCESS.md](supplementary/DATA_ACCESS.md).
+Raw CSEDM files, processed framework logs, precomputed train/validation/test **split files**, LLM caches, and checkpoints are **not** included — see [supplementary/DATA_ACCESS.md](supplementary/DATA_ACCESS.md).
 
 ## Reproduction highlights
 
 - **Cohorts:** F19 (primary), S19 (full tier)
-- **Split:** student 80/10/10, 10 random seeds
+- **Split:** student-level 80/10/10, seeds 0–9 — **not** shipped as downloadable split lists; reproduced deterministically at runtime (see below)
 - **Backbones:** DKT, DKVMN, SAKT, AKT, qDKT, QIKT, SimpleKT, SparseKT
 - **Backbone baseline:** `problem_onehot` (v0)
 - **Full repro:** v5 on rule-enriched logs (Q + Process + mechanism Error)
 
 Details: [docs/experiment_protocol.md](docs/experiment_protocol.md), [docs/ablation_ladder.md](docs/ablation_ladder.md).
 
+## Train/validation/test splits
+
+Precomputed split list files are **not** provided in the paper supplementary materials or in this repository. Instead, splits are **reproduced in code** when you run training:
+
+- Function: `evipkt.dataset.split_students` (80% train / 10% validation / 10% test, PyTorch `randperm` with fixed seed)
+- Seeds: `--seed 0` … `9` (same as the paper’s 10-run protocol)
+- Scope: student IDs taken from your framework logs for each cohort (F19 and S19 are split **separately**; do not merge cohorts)
+
+Given the same enriched logs and seed, you obtain the same train/valid/test partition as our experiments. Rules: [supplementary/filtering_rules.md](supplementary/filtering_rules.md).
 
 ## License
 
