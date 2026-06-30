@@ -10,7 +10,7 @@ import torch
 
 from evipkt.code_evidence import build_code_evidence
 from evipkt.code_misused_rules import resolve_code_misused_kc
-from evipkt.dataset import build_dkt_samples, collate_dkt_batch
+from evipkt.dataset import build_dkt_samples, collate_dkt_batch, load_student_split, resolve_student_split
 from evipkt.dkt import DKT
 from evipkt.error_mechanism import attach_mechanism_to_record, build_error_mechanism_evidence
 from evipkt.feature_modes import CANONICAL_LOGS
@@ -23,6 +23,25 @@ class ReproSmokeTests(unittest.TestCase):
     def test_canonical_logs_path_is_rule_based(self):
         self.assertIn("process_mechanism", CANONICAL_LOGS)
         self.assertNotIn("llm", CANONICAL_LOGS)
+
+    def test_bundled_student_splits(self):
+        f19 = load_student_split("f19", seed=0)
+        self.assertEqual(len(f19.train_students), 404)
+        self.assertEqual(len(f19.valid_students), 50)
+        self.assertEqual(len(f19.test_students), 52)
+        s19 = load_student_split("s19", seed=0)
+        self.assertEqual(len(s19.train_students), 330)
+        self.assertEqual(len(s19.valid_students), 41)
+        self.assertEqual(len(s19.test_students), 42)
+        students = sorted(
+            set(f19.train_students) | set(f19.valid_students) | set(f19.test_students)
+        )
+        split = resolve_student_split(
+            students,
+            seed=0,
+            logs_path="data/processed/framework_logs_first_process_mechanism.jsonl",
+        )
+        self.assertEqual(split.train_students, f19.train_students)
 
     def test_preprocess_first_writes_rule_based_records(self):
         root = Path(__file__).resolve().parents[1]

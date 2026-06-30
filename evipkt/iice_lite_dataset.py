@@ -10,7 +10,7 @@ import torch
 from torch.utils.data import Dataset
 
 from .codebert_features import CODEBERT_VECTOR_DIM, code_cache_key
-from .dataset import load_framework_logs, split_students
+from .dataset import load_framework_logs
 from .q_matrix import load_q_matrix
 
 IICELiteSample = Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]

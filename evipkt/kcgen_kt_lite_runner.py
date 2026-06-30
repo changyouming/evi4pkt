@@ -17,7 +17,7 @@ from .iice_lite_dataset import (
     load_records_and_q,
 )
 from .kcgen_kt_lite import KCGenKTLite
-from .dataset import split_students
+from .dataset import resolve_student_split
 from .train import EpochMetrics, _binary_metrics
 
 
@@ -78,7 +78,7 @@ def run_kcgen_kt_lite(cfg: IICELiteConfig) -> dict:
         )
 
     students = sorted({str(r["subject_id"]) for r in records})
-    split = split_students(students, seed=cfg.seed)
+    split = resolve_student_split(students, seed=cfg.seed, logs_path=cfg.logs_path)
     if not (0.0 < cfg.train_fraction <= 1.0):
         raise ValueError("train_fraction must be in (0, 1].")
     train_students = (

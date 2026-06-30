@@ -17,6 +17,7 @@ from .dataset import (
     MODES_USING_PROCESS,
     MODES_USING_Q,
     load_framework_logs,
+    resolve_student_split,
     split_students,
 )
 from .dkvmn import DKVMN
@@ -80,7 +81,7 @@ def run_dkvmn(cfg: DKVMNConfig) -> dict:
         problem_q_map = load_q_matrix(q_path) if q_path.exists() else resolve_q_matrix(Path.cwd(), q_path)
         q_kc_dim = len(next(iter(problem_q_map.values())))
 
-    split = split_students(students, seed=cfg.seed)
+    split = resolve_student_split(students, seed=cfg.seed, logs_path=cfg.logs_path)
     if not (0.0 < cfg.train_fraction <= 1.0):
         raise ValueError("train_fraction must be in (0, 1].")
     if cfg.train_fraction < 1.0:

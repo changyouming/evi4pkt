@@ -21,6 +21,7 @@ from .dataset import (
     build_dkt_samples,
     collate_dkt_batch,
     load_framework_logs,
+    resolve_student_split,
     split_students,
 )
 from .error_evidence import error_evidence_source_for_mode, error_evidence_vector_dim
@@ -50,7 +51,7 @@ def build_kt_data(cfg, *, feature_mode: str | None = None):
         problem_q_map = load_q_matrix(q_path) if q_path.exists() else resolve_q_matrix(Path.cwd(), q_path)
         q_kc_dim = len(next(iter(problem_q_map.values())))
 
-    split = split_students(students, seed=cfg.seed)
+    split = resolve_student_split(students, seed=cfg.seed, logs_path=cfg.logs_path)
     if not (0.0 < cfg.train_fraction <= 1.0):
         raise ValueError("train_fraction must be in (0, 1].")
     if cfg.train_fraction < 1.0:

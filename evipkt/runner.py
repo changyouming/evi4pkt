@@ -24,6 +24,7 @@ from .dataset import (
     build_dkt_samples,
     collate_dkt_batch,
     load_framework_logs,
+    resolve_student_split,
     split_students,
 )
 from .dkt import DKT
@@ -117,7 +118,7 @@ def run_dkt(cfg: DKTConfig) -> dict:
                 "Run: python scripts/build_codebert_cache_f19.py"
             )
 
-    split = split_students(students, seed=cfg.seed)
+    split = resolve_student_split(students, seed=cfg.seed, logs_path=cfg.logs_path)
     if not (0.0 < cfg.train_fraction <= 1.0):
         raise ValueError("train_fraction must be in (0, 1].")
     if cfg.train_fraction < 1.0:

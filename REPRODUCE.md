@@ -1,6 +1,8 @@
 # Evi4PKT — Reproduction Guide
 
 
+Obtain CSEDM F19/S19 data (not shipped here). **Student split lists** (seeds 0–9) are bundled under `data/splits/`; see [data/splits/README.md](data/splits/README.md).
+
 ## 1. Environment
 
 ```bash

@@ -173,6 +173,97 @@ def split_students_stratified(students_by_group: Dict[str, List[str]], seed: int
     return SplitData(train_students=train, valid_students=valid, test_students=test)
 
 
+DEFAULT_SPLIT_DIR = Path(__file__).resolve().parents[1] / "data" / "splits"
+
+
+def infer_cohort_from_logs_path(logs_path: str | Path) -> str | None:
+    p = str(logs_path).replace("\\", "/").lower()
+    if "processed_s19" in p or "/s19/" in p:
+        return "s19"
+    if "processed" in p or "/f19/" in p:
+        return "f19"
+    return None
+
+
+def split_file_path(cohort: str, seed: int, split_dir: Path | None = None) -> Path:
+    root = split_dir or DEFAULT_SPLIT_DIR
+    return root / cohort / f"seed_{seed}.json"
+
+
+def split_to_dict(
+    split: SplitData,
+    *,
+    cohort: str,
+    seed: int,
+    source_logs: str = "",
+) -> dict:
+    n = len(split.train_students) + len(split.valid_students) + len(split.test_students)
+    return {
+        "cohort": cohort,
+        "seed": seed,
+        "protocol": "student 80/10/10",
+        "n_students": n,
+        "source_logs": source_logs,
+        "train_students": split.train_students,
+        "valid_students": split.valid_students,
+        "test_students": split.test_students,
+    }
+
+
+def save_student_split(
+    split: SplitData,
+    *,
+    cohort: str,
+    seed: int,
+    split_dir: Path | None = None,
+    source_logs: str = "",
+) -> Path:
+    path = split_file_path(cohort, seed, split_dir)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = split_to_dict(split, cohort=cohort, seed=seed, source_logs=source_logs)
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    return path
+
+
+def load_student_split(cohort: str, seed: int, split_dir: Path | None = None) -> SplitData:
+    path = split_file_path(cohort, seed, split_dir)
+    if not path.is_file():
+        raise FileNotFoundError(f"Missing split file: {path}")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return SplitData(
+        train_students=[str(s) for s in payload["train_students"]],
+        valid_students=[str(s) for s in payload["valid_students"]],
+        test_students=[str(s) for s in payload["test_students"]],
+    )
+
+
+def resolve_student_split(
+    students: List[str],
+    *,
+    seed: int,
+    logs_path: str | Path | None = None,
+    cohort: str | None = None,
+    split_dir: Path | None = None,
+) -> SplitData:
+    """Use bundled split JSON when available; otherwise fall back to split_students."""
+    resolved_cohort = cohort or (
+        infer_cohort_from_logs_path(logs_path) if logs_path is not None else None
+    )
+    if resolved_cohort:
+        path = split_file_path(resolved_cohort, seed, split_dir)
+        if path.is_file():
+            split = load_student_split(resolved_cohort, seed, split_dir)
+            expected = set(students)
+            actual = set(split.train_students) | set(split.valid_students) | set(split.test_students)
+            if expected != actual:
+                raise ValueError(
+                    f"Split file {path} does not match framework logs: "
+                    f"logs have {len(expected)} students, split file covers {len(actual)}."
+                )
+            return split
+    return split_students(students, seed=seed)
+
+
 def load_framework_logs(jsonl_path: Path) -> List[dict]:
     records: List[dict] = []
     with jsonl_path.open("r", encoding="utf-8") as f:

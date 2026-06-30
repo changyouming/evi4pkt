@@ -18,7 +18,7 @@ from evipkt.code2vec_features import (
     code2vec_vector,
     code_cache_key,
 )
-from evipkt.dataset import load_framework_logs, split_students
+from evipkt.dataset import load_framework_logs, resolve_student_split
 
 
 def parse_args() -> argparse.Namespace:
@@ -48,7 +48,7 @@ def main() -> None:
 
     records = load_framework_logs(logs_path)
     students = sorted({str(r["subject_id"]) for r in records})
-    split = split_students(students, seed=args.vocab_seed)
+    split = resolve_student_split(students, seed=args.vocab_seed, logs_path=logs_path)
     train_set = set(split.train_students)
 
     train_codes: list[str] = []
