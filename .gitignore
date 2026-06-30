@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+runs/
+data/raw/
+data/processed/
+data/processed_s19/
+data/processed_all/
+*.pt
+*.ckpt
+llm_*cache*

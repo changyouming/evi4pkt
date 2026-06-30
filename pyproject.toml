@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evipkt"
+version = "0.1.0"
+description = "Evidence-enhanced programming knowledge tracing on CSEDM CodeWorkout logs."
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.0",
+    "torch>=2.0",
+]
+
+[project.optional-dependencies]
+repro = ["scipy>=1.11"]
+pkt = ["transformers>=4.40"]
+
+[tool.setuptools]
+packages = ["evipkt"]
+

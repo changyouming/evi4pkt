@@ -1,0 +1,405 @@
+{
+  "subject_id": "S_anon_a575dc",
+  "problem_id": 13,
+  "programming_task": {
+    "problem_id": 13,
+    "assignment_id": 439,
+    "prompt": "Write a function in Java that implements the following logic: You are driving a little too fast, and a police officer stops you. Write code to compute the result, encoded as an int value: 0=no ticket, 1=small ticket, or 2=big ticket. If speed is 60 or less, the result is 0. If speed is between 61 and 80 inclusive, the result is 1. If speed is 81 or more, the result is 2. Unless it is your birthday--on that day, your speed can be 5 higher in all cases.",
+    "q_kc": [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "kc_catalog": [
+      "IfElse",
+      "NestedIf",
+      "While",
+      "For",
+      "NestedFor",
+      "MathBasic",
+      "MathMod",
+      "LogicAndNotOr",
+      "LogicCompareNum",
+      "LogicBoolean",
+      "StringFormat",
+      "StringConcat",
+      "StringIndex",
+      "StringLen",
+      "StringEqual",
+      "CharEqual",
+      "ArrayIndex",
+      "DefFunction"
+    ]
+  },
+  "student_code": {
+    "code_state_id": "c98c36c2a744...",
+    "code": "public int caughtSpeeding(int speed, boolean isBirthday)\r\n{\r\n    int speed\r\n    if isBirthday\r\n    {\r\n        if speed <= 65\r\n        {\r\n         return 0   \r\n        }\r\n        else if speed <= 85\r\n        {\r\n         return 1   \r\n        }\r\n        else\r\n        {\r\n         return 2   \r\n        }\r\n    }\r\n    else\r\n    {\r\n       if speed <= 65\r\n        {\r\n         return 0   \r\n        }\r\n        ..."
+  },
+  "code_issues": {
+    "pkt_label": 0,
+    "pkt_correct": false,
+    "label_rule": "score_ge_1_0",
+    "score": 0.0,
+    "outcome_type": "compile_error",
+    "has_compile_error": true,
+    "issues": [
+      {
+        "type": "compile_error",
+        "message": "line 3: error: ';' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 4: error: '(' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 4: error: ')' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 6: error: '(' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 6: error: ')' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 8: error: ';' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 10: error: '(' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 10: error: ')' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 12: error: ';' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 16: error: ';' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 21: error: '(' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 21: error: ')' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 23: error: ';' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 25: error: '(' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 25: error: ')' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 27: error: ';' expected."
+      },
+      {
+        "type": "compile_error",
+        "message": "line 31: error: ';' expected"
+      }
+    ]
+  },
+  "trajectory": {
+    "student_timestep": 0,
+    "problem_attempt": 1,
+    "server_timestamp": "2019-09-27T11:29:04",
+    "order": 11000,
+    "run_event_id": 11000,
+    "prev_same_problem_run_event_id": null,
+    "prev_same_problem_pkt_label": null
+  },
+  "pkt_label": 0,
+  "score": 0.0,
+  "code_evidence": {
+    "vector": [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      "..."
+    ],
+    "vector_dim": 23,
+    "source": "llm_kc_alignment",
+    "kc_in_code": [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "kc_coverage": 0.6666666666666666,
+    "missing_kc": [
+      "MathBasic",
+      "LogicAndNotOr"
+    ],
+    "extra_kc": []
+  },
+  "error_evidence": {
+    "source": "llm_kc_error_alignment",
+    "prompt_version": "v7_compile_error_review_filter",
+    "mappability": "review_required",
+    "kc_error": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "non_kc_error": 1,
+    "mechanism_v8": {
+      "source": "rule_compile_message",
+      "schema_version": "v8_non_kc_mechanism",
+      "eligible": true,
+      "outcome_type": "compile_error",
+      "has_compile_error": true,
+      "non_kc_error": 1.0,
+      "primary_mechanism_id": "M1",
+      "primary_mechanism_name": "semicolon_missing",
+      "secondary_mechanisms": [
+        {
+          "mechanism_id": "M2",
+          "mechanism_name": "delimiter_bracket_mismatch",
+          "message": "line 4: error: '(' expected."
+        }
+      ],
+      "compile_messages": [
+        "line 3: error: ';' expected.",
+        "line 4: error: '(' expected.",
+        "line 4: error: ')' expected.",
+        "line 6: error: '(' expected."
+      ],
+      "message_count": 17,
+      "mechanism_catalog": [
+        {
+          "id": "M1",
+          "name": "semicolon_missing"
+        },
+        {
+          "id": "M2",
+          "name": "delimiter_bracket_mismatch"
+        },
+        {
+          "id": "M3",
+          "name": "undefined_identifier"
+        },
+        {
+          "id": "M4",
+          "name": "missing_return_path"
+        },
+        {
+          "id": "M5",
+          "name": "type_mismatch"
+        },
+        {
+          "id": "M6",
+          "name": "control_flow_mismatch"
+        },
+        {
+          "id": "M7",
+          "name": "invalid_expression"
+        },
+        {
+          "id": "M8",
+          "name": "literal_quote_error"
+        },
+        {
+          "id": "M9",
+          "name": "operator_misuse"
+        },
+        {
+          "id": "M10",
+          "name": "method_signature_mismatch"
+        },
+        {
+          "id": "M11",
+          "name": "scope_or_duplicate"
+        },
+        {
+          "id": "M12",
+          "name": "unclassified_compile"
+        }
+      ],
+      "vector": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        "..."
+      ],
+      "vector_dim": 12
+    }
+  },
+  "process_evidence": {
+    "source": "kc_history",
+    "timing": "before_current_interaction",
+    "kc_catalog": [
+      "IfElse",
+      "NestedIf",
+      "While",
+      "For",
+      "NestedFor",
+      "MathBasic",
+      "MathMod",
+      "LogicAndNotOr",
+      "LogicCompareNum",
+      "LogicBoolean",
+      "StringFormat",
+      "StringConcat",
+      "StringIndex",
+      "StringLen",
+      "StringEqual",
+      "CharEqual",
+      "ArrayIndex",
+      "DefFunction"
+    ],
+    "kc_exposure_count": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "kc_success_count": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "kc_exposure_norm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "kc_success_rate": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "vector": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      "..."
+    ],
+    "vector_dim": 36
+  }
+}
